@@ -3,19 +3,17 @@ import pandas as pd
 import librosa as lr
 import numpy as np
 def extract_features():
-    
     path = "./Wav/Test"
     file = os.listdir(path)[0]
-    df= pd.DataFrame(columns = ['max_pitch','avg_pitch','var_pitch','harmonic','harmonic_var','percussive','percussive_var','Chroma_cens','Chroma_cens_var','chroma_stft_mean','chroma_stft_var','chroma_cqt_mean','chroma_cqt_var','Mfccs','Mfccs_var','mfcc_delta_mean','mfcc_delta_var','Contrast','Contrast_var','Rolloff','Rolloff_var','Zrate','Zrate_var','Cent','Cent_var','tonnetz_mean','tonnetz_var','poly_features_mean','poly_features_var','spec_bw_mean','spec_bw_var','rmse_mean','rmse_var','melspec_mean','melspec_var','label'])
-
     if file[0] == 'c' or file[0]=='C':
         label = 0
     elif file[0] == 'o' or file[0] == 'O':
         label = 1
     else: 
         label = 2
+
     file_name = path+'/'+file
-    audio,sfreq = lr.load(file_name)
+    audio,sfreq = lr.load(file_name, sr=None)
     S = np.abs(lr.stft(audio))
     pitches,magnitudes = lr.core.piptrack(y = audio ,sr = sfreq)
     #min_pitch = np.min(pitches)
@@ -88,6 +86,6 @@ def extract_features():
     melspec_var = np.var(melspectrogram)
     
     data = list([max_pitch,avg_pitch,var_pitch,harmonic,harmonic_var,percussive,percussive_var,Chroma_cens,Chroma_cens_var,chroma_stft_mean,chroma_stft_var,chroma_cqt_mean,chroma_cqt_var,Mfccs,Mfccs_var,mfcc_delta_mean,mfcc_delta_var,Contrast,Contrast_var,Rolloff,Rolloff_var,Zrate,Zrate_var,Cent,Cent_var,tonnetz_mean,tonnetz_var,poly_features_mean,poly_features_var,spec_bw_mean,spec_bw_var,rmse_mean,rmse_var,melspec_mean,melspec_var,label])
-    df.loc[0]=data
-    return df
+ 
+    return data
         

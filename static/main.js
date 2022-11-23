@@ -1,8 +1,3 @@
-// window.onload=function(){
-//     // document.querySelector('h2').style.color='red';
-
-// }
-
 class VoiceRecorder{
     constructor(){
         if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia){
@@ -16,7 +11,7 @@ class VoiceRecorder{
         this.stream
         this.chunks =[]
         this.isRecording = false
-
+        this.options
         this.recorderRef=document.querySelector("#recorder");
         this.playerRef=document.querySelector("#player");
         this.startRef=document.querySelector("#start");
@@ -38,16 +33,29 @@ class VoiceRecorder{
             console.log("stream ended");
         }
         this.recorderRef.srcObject=this.stream
-        this.mediaRecorder=new MediaRecorder(this.stream)
+        this.mediaRecorder=new MediaRecorder(this.stream,this.options)
         this.mediaRecorder.ondataavailable=this.onMediaRecorderDataAvailable.bind(this);
         this.mediaRecorder.onstop=this.onMediaRecorderStop.bind(this);
         this.recorderRef.play();
         this.mediaRecorder.start();
     }
     onMediaRecorderDataAvailable(e){this.chunks.push(e.data)}
-    onMediaRecorderStop(e){
-        const blob = new Blob(this.chunks,{'type':'audio/wav; codesc=opus'});
-        saveAs(blob,"Recording.wav")
+    onMediaRecorderStop(){
+        const blob = new Blob(this.chunks,{'type':'audio/wav; codecs=opus'});
+        let formData = new FormData();
+        let file=new File([blob],"my-rec.wav")
+     
+        formData.append('data', file);
+        console.log(MediaRecorder.isTypeSupported( "audio/webm"))
+        fetch('http://127.0.0.1:5000/', {
+          method: 'POST',
+          body: formData
+
+      }).then(response => response.json()
+      ).then(json => {
+          console.log(json)
+      });
+        
 
         const audioUrl= window.URL.createObjectURL(blob);
         this.playerRef.src=audioUrl;

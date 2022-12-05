@@ -170,16 +170,16 @@ async function createDownloadLink(blob)
 {
     // const file=new File(blob,'voice.wav',{type:blob.ty#})
     var formData = new FormData();
-    formData.append('key', blob.blob.name);
-    await $.ajax({
-        method:"POST",
-        // url: " gsjh",
-        processData: false,
-        contentType:false,
-        async:false,
-        data: formData,
+    formData.append('key', blob,blob.name);
+    // await $.ajax({
+    //     method:"POST",
         
-    })
-    
+    //     processData: false,
+    //     contentType:false,
+    //     async:false,
+    //     data: formData,
+        
+    // })
+	console.log(blob);
 }
 

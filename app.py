@@ -19,12 +19,7 @@ def index():
     else:
         if 'data' in request.files:
             url = "http://127.0.0.1:5000/"
-            key = 'REST API KEY'
-            headers = {
-                "Content-Type": "application/octet-stream",
-                "Transfer-Encoding":"chunked",
-                "Authorization": "KakaoAK " + key,
-            }
+          
 
             file = request.files['data']
             
@@ -53,7 +48,7 @@ def index():
             with open("my-rec2.wav", 'rb') as fp:
                 audio = fp.read()
 
-            result = request.post(url, headers=headers, data=audio)
+            result = request.post(url, data=audio)
             features_list=result.text
             prediction=""
         

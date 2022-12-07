@@ -1,18 +1,9 @@
-from flask import Flask, request, render_template,jsonify,request
+from flask import Flask, request, render_template,request
 import os
-import librosa
-import librosa.display
-import IPython.display as ipd
 import matplotlib.pyplot as plt
 import functions as fn
 import soundfile
 import io
-import numpy as np
-import base64
-
-from flask import Response
-from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
-from matplotlib.figure import Figure
 from werkzeug.utils import secure_filename
 app = Flask(__name__)
 UPLOAD_FOLDER = "./"

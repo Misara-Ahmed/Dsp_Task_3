@@ -386,8 +386,10 @@ def plot_melspectrogram(file_name):
     return img,fig
 
 def apply_model(features_list):
-    loaded_model = pickle.load(open('./Model.sav', 'rb'))
-    x_pre = np.array(features_list)
-    x_pre = x_pre.reshape(1,-1)
-    prediction=loaded_model.predict(x_pre)
-    return prediction
+    voice_model = pickle.load(open('./Person_model.sav', 'rb'))
+    speech_model=pickle.load(open('./Word_model.sav', 'rb'))
+    x_pre=np.array(features_list)
+    x_pre=x_pre.reshape(1,-1)
+    voice_prediction=voice_model.predict(x_pre)
+    speech_prediction=speech_model.predict(x_pre)
+    return voice_prediction,speech_prediction

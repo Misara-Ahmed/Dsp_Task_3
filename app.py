@@ -11,6 +11,7 @@ app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 @app.route("/",methods=['GET','POST'])
 def index():
     if(request.method=='GET'):
+        
         features_list=fn.feature_extraction_array('./my-rec.wav')
         voice_prediction,speech_prediction=fn.apply_model(features_list)
         img,fig=fn.plot_melspectrogram('./my-rec.wav')

@@ -25,9 +25,13 @@
             <span>Saved Recording</span>
             <audio id="player" controls></audio>
             <h1> {{ features }}</h1>
-            <h1>{{ spectro }}</h1>
+           
         </div>
-        
+        {% if spectro %}
+        <div >
+            <img src="{{ url_for('static',filename='spectro.png') }}" width="500" height="400" />
+        </div>
+        {% endif %}
         
 
 

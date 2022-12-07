@@ -1,8 +1,10 @@
 import os
 import pandas as pd
 import librosa as lr
+import librosa.display 
 import numpy as np
 import pickle
+import matplotlib.pyplot as plt
 def extract_features(file_name):
     audio,sfreq = lr.load(file_name)
     S = np.abs(lr.stft(audio))
@@ -78,6 +80,13 @@ def extract_features(file_name):
     
     data = list([max_pitch,avg_pitch,var_pitch,harmonic,harmonic_var,percussive,percussive_var,Chroma_cens,Chroma_cens_var,chroma_stft_mean,chroma_stft_var,chroma_cqt_mean,chroma_cqt_var,Mfccs,Mfccs_var,mfcc_delta_mean,mfcc_delta_var,Contrast,Contrast_var,Rolloff,Rolloff_var,Zrate,Zrate_var,Cent,Cent_var,tonnetz_mean,tonnetz_var,poly_features_mean,poly_features_var,spec_bw_mean,spec_bw_var,rmse_mean,rmse_var,melspec_mean,melspec_var])
     return data
+
+def plot_melspectrogram(file_name):
+    audio,sfreq = lr.load(file_name)
+    melspectrogram = lr.feature.melspectrogram(y=audio, sr=sfreq)
+    fig=plt.figure(figsize=(25,10))
+    img=librosa.display.specshow(melspectrogram,x_axis='time',y_axis='mel',sr=sfreq)
+    return img,fig
 
 def apply_model(features_list):
     loaded_model = pickle.load(open('./Model.sav', 'rb'))

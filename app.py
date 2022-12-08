@@ -13,9 +13,12 @@ app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 def index():
     if(request.method=='GET'):
         
-        features_list=audio_features.feature_extraction_array('./my-rec.wav')
-        voice_prediction,speech_prediction=fn.apply_model(features_list)
-        fn.plot_melspectrogram('./my-rec.wav')
+        features_list=fn.feature_extraction_array('./my-rec.wav')
+        prediction=fn.apply_model(features_list)
+        img,fig = fn.plot_melspectrogram('./my-rec.wav')
+        fig.colorbar(img,format="%+2.f")
+        spectro = plt.savefig('./static/spectro.png')
+        spectro = True
         result_1 = fn.Names_return(prediction)
         
     else:

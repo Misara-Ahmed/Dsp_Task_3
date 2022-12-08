@@ -2,6 +2,7 @@ from flask import Flask, request, render_template,request
 import os
 import matplotlib.pyplot as plt
 import functions as fn
+import audio_features
 import soundfile
 import io
 from werkzeug.utils import secure_filename
@@ -11,22 +12,12 @@ app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 @app.route("/",methods=['GET','POST'])
 def index():
     if(request.method=='GET'):
-        features_list=fn.feature_extraction_array('./my-rec.wav')
-        prediction=fn.apply_model(features_list)
+        
+        features_list=audio_features.feature_extraction_array('./my-rec.wav')
+        voice_prediction,speech_prediction=fn.apply_model(features_list)
+        fn.plot_melspectrogram('./my-rec.wav')
         result_1 = fn.Names_return(prediction)
-        img,fig=fn.plot_melspectrogram('./my-rec.wav')
-        fig.colorbar(img,format="%+2.f")
-        spectro= plt.savefig('./static/spectro.png')
-        spectro=True
-        # fig = Figure()
-        # ax = fig.subplots()
-        # ax.plot([1, 2])
-        # # Save it to a temporary buffer.
-        # buf = io.BytesIO()
-        # fig.savefig(buf, format="png")
-        # # Embed the result in the html output.
-        # data = base64.b64encode(buf.getbuffer()).decode("ascii")
-        # return f"<img src='data:image/png;base64,{data}'/>"
+        
     else:
         if 'data' in request.files:
             url = "http://127.0.0.1:5000/"
@@ -65,6 +56,7 @@ def index():
             # voice_prediction=""
             # speech_prediction=""
     return render_template('index.html',voice_prediction= result_1[0],speech_prediction=result_1[1],spectro=spectro)
+
 
 
 if __name__ == '__main__':        

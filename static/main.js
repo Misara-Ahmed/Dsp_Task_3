@@ -118,7 +118,7 @@ function startRecording() {
 		audioContext = new AudioContext();
 
 		//update the format 
-		document.getElementById("recorder").innerHTML="recorder: 1 channel pcm @ "+audioContext.sampleRate/1000+"kHz"
+		document.getElementById("player").innerHTML="player: 1 channel pcm @ "+audioContext.sampleRate/1000+"kHz"
 
 		/*  assign to gumStream for later use  */
 		gumStream = stream;

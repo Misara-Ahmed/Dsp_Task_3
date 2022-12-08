@@ -4,6 +4,8 @@
     box-sizing: border-box;
     text-decoration: none;
     list-style: none;
+    /* display: grid; */
+    /* grid-template-columns: auto auto auto; */
 
 }
 
@@ -14,6 +16,11 @@ body{
     align-items: center;
     justify-content: center;
     height: 100vh;
+    display: grid;
+    grid-template-columns: repeat(auto-fill,minmax(500px,300px));
+    /* gap: 30px; */
+    margin-left: 200px;
+    align-content: stretch;
 }
 
 .container{
@@ -25,6 +32,7 @@ body{
     background: rgb(255, 255, 255);
     width: 400px;
     box-shadow: 0px 0px 10px indigo;
+    /* flex-grow: 0; */
 }
 .container > *{   
     margin: 8px;     /* بيبعد الكلام عن بعضه */
@@ -42,4 +50,20 @@ button{
 audio{
     border: 1px solid indigo;
     border-radius: 30px;
+}
+.test{
+    max-width: 600px;
+    padding: 10px 20px;
+    /* border: 2px solid indigo; */
+    /* font-size: 20px; */
+    color: rgb(0, 0, 0);
+    background-color: transparent;
+    
+}
+.spectro{
+    width:700px;
+    height:500px;
+    margin: 0px;
+    box-shadow: 0px 0px 10px indigo;
+    
 }

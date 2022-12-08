@@ -23,13 +23,17 @@
                 <button id ="stopButton">Stop Recording</button>
             </div>
             <span>Saved Recording</span>
-            <audio id="player" controls></audio>
-            <h1> {{ voice_prediction }}</h1>
-            <h1> {{ speech_prediction }}</h1>
+            <!-- <audio id="player" controls></audio> -->
+            <div class="test">
+                <h1> {{ voice_prediction }}</h1>
+                <h1> {{ speech_prediction }}</h1>
+            </div>
+            <!-- <h1> {{ voice_prediction }}</h1>
+            <h1> {{ speech_prediction }}</h1> -->
            
         </div>
         {% if spectro %}
-        <div >
+        <div class="spectro" >
             <img src="{{ url_for('static',filename='spectro.png') }}" width="500" height="400" />
         </div>
         {% endif %}
@@ -38,6 +42,6 @@
 
         <script type="text/javascript" src="{{ url_for('static',filename='/main.js') }}" ></script>
         <script type="text/javascript" src="{{ url_for('static',filename='/recorder.js') }}" ></script>
+        
     </body>
 </html>
-

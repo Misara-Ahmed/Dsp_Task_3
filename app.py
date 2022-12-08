@@ -11,9 +11,9 @@ app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 @app.route("/",methods=['GET','POST'])
 def index():
     if(request.method=='GET'):
-        
         features_list=fn.feature_extraction_array('./my-rec.wav')
-        voice_prediction,speech_prediction=fn.apply_model(features_list)
+        prediction=fn.apply_model(features_list)
+        result_1 = fn.Names_return(prediction)
         img,fig=fn.plot_melspectrogram('./my-rec.wav')
         fig.colorbar(img,format="%+2.f")
         spectro= plt.savefig('./static/spectro.png')
@@ -61,11 +61,10 @@ def index():
 
             result = request.post(url, data=audio)
             features_list=result.text
-            voice_prediction=""
-            speech_prediction=""
-            
-
-    return render_template('index.html',voice_prediction= voice_prediction,speech_prediction=speech_prediction,spectro=spectro)
+            result_1=[]
+            # voice_prediction=""
+            # speech_prediction=""
+    return render_template('index.html',voice_prediction= result_1[0],speech_prediction=result_1[1],spectro=spectro)
 
 
 if __name__ == '__main__':        

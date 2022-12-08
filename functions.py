@@ -392,4 +392,27 @@ def apply_model(features_list):
     x_pre=x_pre.reshape(1,-1)
     voice_prediction=voice_model.predict(x_pre)
     speech_prediction=speech_model.predict(x_pre)
-    return voice_prediction,speech_prediction
+    pred_num = []
+    pred_num.append(voice_prediction)
+    pred_num.append(speech_prediction)
+    pred_num = np.array(pred_num)
+    return pred_num
+def Names_return(a):
+    """return list of names according to list of numbers 
+    first item 0-> Open
+    1-> Not def
+    2-> Close
+    second item 
+    0-> Ahmed
+    1-> Hanya
+    2-> Misara
+    3-> Youssef
+    4-> Others"""
+    voice = ["Open","Not Def","Close"]
+    speech = ["Ahmed","Hanya","Misara","Youssef","Others"]
+    names = []
+    for i in range(len(a)):
+        names.append(voice[a[i][0]])
+        names.append(speech[a[i][0]])
+    return names
+    

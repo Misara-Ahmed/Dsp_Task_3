@@ -12,15 +12,13 @@ app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 @app.route("/",methods=['GET','POST'])
 def index():
     if(request.method=='GET'):
-        
-        features_list=fn.feature_extraction_array('./my-rec.wav')
+        features_list=audio_features.feature_extraction_array('./my-rec.wav')
         prediction=fn.apply_model(features_list)
         img,fig = fn.plot_melspectrogram('./my-rec.wav')
         fig.colorbar(img,format="%+2.f")
         spectro = plt.savefig('./static/spectro.png')
         spectro = True
         result_1 = fn.Names_return(prediction)
-        
     else:
         if 'data' in request.files:
             url = "http://127.0.0.1:5000/"
@@ -47,9 +45,8 @@ def index():
                     format='wav'
                 )
                 data = fio.getvalue()
-
+            
             soundfile.write('my-rec.wav', data, samplerate)
-
             with open("my-rec.wav", 'rb') as fp:
                 audio = fp.read()
 

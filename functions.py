@@ -7,12 +7,7 @@ import pickle
 import matplotlib.pyplot as plt
 from librosa import power_to_db , util
 import scipy
-
-
-
-
 def plot_melspectrogram(file_name):
-    
     plt.rcParams['font.size'] = '20'
     audio,sfreq = lr.load(file_name)
     melspectrogram = lr.feature.melspectrogram(y=audio, sr=sfreq)
@@ -20,8 +15,7 @@ def plot_melspectrogram(file_name):
     img=librosa.display.specshow(melspectrogram,x_axis='time',y_axis='mel',sr=sfreq)
     fig.colorbar(img,format="%+2.f")
     plt.savefig('./static/spectro.png')
-    return
-
+    return img,fig
 def apply_model(features_list):
     voice_model = pickle.load(open('./Person_model.sav', 'rb'))
     speech_model=pickle.load(open('./Word_model.sav', 'rb'))

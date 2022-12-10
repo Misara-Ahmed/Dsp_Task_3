@@ -7,6 +7,7 @@ import pickle
 import matplotlib.pyplot as plt
 from librosa import power_to_db , util
 import scipy
+iter = 0
 def plot_melspectrogram(file_name):
     plt.rcParams['font.size'] = '20'
     audio,sfreq = lr.load(file_name)
@@ -41,9 +42,8 @@ def Names_return(a):
     4-> Others"""
     voice = ["Open","Not Def","Close"]
     speech = ["Ahmed","Hanya","Misara","Youssef","Others"]
-    names = []
-    for i in range(len(a)):
-        names.append(voice[a[i][0]])
-        names.append(speech[a[i][0]])
+    names = []   
+    names.append(voice[a[1][0]])
+    names.append(speech[a[0][0]])
     return names
     

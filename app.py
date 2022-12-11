@@ -36,19 +36,19 @@ def index():
             
             # Read the audio data again.
             data, samplerate = soundfile.read(file)
-            with io.BytesIO() as fio:
-                soundfile.write(
-                    fio, 
-                    data, 
-                    samplerate=samplerate, 
+            # with io.BytesIO() as fio:
+            #     soundfile.write(
+            #         fio, 
+            #         data, 
+            #         samplerate=samplerate, 
                     
-                    format='wav'
-                )
-                data = fio.getvalue()
-            
-            soundfile.write(f'my-rec.wav', data, samplerate)
+            #         format='wav'
+            #     )
+            #     data = fio.getvalue()
+            # data = data.decode('float64')
+            # print(data.dtype)
+            soundfile.write(f'my-rec{fn.iter}.wav', data, samplerate)
             fn.iter += 1
-            print(fn.iter)
             with open("my-rec.wav", 'rb') as fp:
                 audio = fp.read()
 

@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template,request
+from flask import Flask, request, render_template
 import os
 import matplotlib.pyplot as plt
 import functions as fn

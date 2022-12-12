@@ -41,7 +41,7 @@ def Names_return(a):
     3-> Youssef
     4-> Others"""
     voice = ["Open The Door","Open The Book","Open The Window","Close"]
-    speech = ["Ahmed","Misara","Hanya","Youssef","Others"]
+    speech = ["Ahmed","Misara","Youssef","Hanya","Others"]
     names = []   
     names.append(voice[a[1][0]])
     names.append(speech[a[0][0]])

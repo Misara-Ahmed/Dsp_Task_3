@@ -59,6 +59,9 @@ def index():
     # print(result_1[0])
     return render_template('index.html',voice_prediction= result_1[0],speech_prediction=result_1[1],spectro=spectro)
 
+@app.route("/eposter")
+def eposter():
+    return render_template('eposter.html')
 
 
 if __name__ == '__main__':        

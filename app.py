@@ -50,7 +50,6 @@ def index():
             soundfile.write('my-rec.wav', data, samplerate)
             with open("my-rec.wav", 'rb') as fp:
                 audio = fp.read()
-
             # result = request.post(url, data=audio)
             # features_list=result.text
             result_1=[]

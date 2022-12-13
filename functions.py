@@ -77,15 +77,25 @@ def apply_model(features_list):
     if flag:
         winner = 3
     y.append(log_likelihood)
+    gmm_files = [i + '.joblib' for i in ['Door', 'Close', 'Book','Window']]
+    models = [joblib.load(fname) for fname in gmm_files]
+    log_likelihood = np.zeros(len(models))
+    y=[]
+    for i in range(len(models)):
+        gmm = models[i]
+        scores = np.array(gmm.score(vector))
+        log_likelihood[i] = scores.sum()
+    winner_0 = np.argmax(log_likelihood)
     # x_pre=x_pre.reshape(1,-1)
     # # voice_prediction=voice_model.predict(x_pre)
     # # speech_prediction=speech_model.predict(x_pre)
     pred_num = []
-    pred_num.append([0])
+    pred_num.append([winner_0])
     pred_num.append([winner])
     # pred_num.append(voice_prediction)
     # pred_num.append(speech_prediction)
     pred_num = np.array(pred_num)
+    print(pred_num)
     return pred_num
 def Names_return(a):
     """return list of names according to list of numbers 
@@ -99,7 +109,7 @@ def Names_return(a):
     2-> Misara
     3-> Youssef
     4-> Others"""
-    voice = ["Open The Door","Open The Book","Open The Window","Close"]
+    voice = ['Door', 'Close', 'Book','Window']
     speech = ["Misara","Ahmed","Youssef","Others"]
     print(a)
     names = []

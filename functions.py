@@ -58,7 +58,7 @@ def apply_model(features_list):
     # x_pre = np.array(features_list)
     audio, sr = lr.load(features_list,mono=True,duration=30)
     vector = extract_features(audio,sr)
-    gmm_files = [i + '.joblib' for i in ['Misara', 'Ahmed', 'Youssef']]
+    gmm_files = [i + '.joblib' for i in ['Misara', 'Ahmed', 'Youssef','Hanya']]
     models = [joblib.load(fname) for fname in gmm_files]
     log_likelihood = np.zeros(len(models))
     y=[]
@@ -75,7 +75,7 @@ def apply_model(features_list):
         if abs(flagLst[i])<0.4:
             flag = True
     if flag:
-        winner = 3
+        winner = 4
     y.append(log_likelihood)
     gmm_files = [i + '.joblib' for i in ['Door', 'Close', 'Book','Window']]
     models = [joblib.load(fname) for fname in gmm_files]
@@ -110,10 +110,9 @@ def Names_return(a):
     3-> Youssef
     4-> Others"""
     voice = ['Door', 'Close', 'Book','Window']
-    speech = ["Misara","Ahmed","Youssef","Others"]
+    speech = ["Misara","Ahmed","Youssef","Hanya","Others"]
     print(a)
     names = []
     names.append(voice[a[0][0]])
     names.append(speech[a[1][0]])
     return names
-    

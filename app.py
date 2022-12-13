@@ -12,8 +12,8 @@ app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 @app.route("/",methods=['GET','POST'])
 def index():
     if(request.method=='GET'):
-        features_list=audio_features.feature_extraction_array('./my-rec.wav')
-        prediction=fn.apply_model(features_list)
+        # features_list=audio_features.feature_extraction_array('./my-rec.wav')
+        prediction=fn.apply_model('./my-rec.wav')
         img,fig = fn.plot_melspectrogram('./my-rec.wav')
         fig.colorbar(img,format="%+2.f")
         spectro = plt.savefig('./static/spectro.png')
@@ -47,16 +47,16 @@ def index():
             #     data = fio.getvalue()
             # data = data.decode('float64')
             # print(data.dtype)
-            soundfile.write(f'my-rec{fn.iter}.wav', data, samplerate)
-            fn.iter += 1
+            soundfile.write(f'my-rec.wav', data, samplerate)
             with open("my-rec.wav", 'rb') as fp:
                 audio = fp.read()
 
-            result = request.post(url, data=audio)
-            features_list=result.text
+            # result = request.post(url, data=audio)
+            # features_list=result.text
             result_1=[]
             # voice_prediction=""
             # speech_prediction=""
+    # print(result_1[0])
     return render_template('index.html',voice_prediction= result_1[0],speech_prediction=result_1[1],spectro=spectro)
 
 

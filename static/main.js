@@ -85,10 +85,23 @@ var AudioContext = window.AudioContext || window.webkitAudioContext;
 var audioContext //audio context to help us record
 
 var recordButton = document.getElementById("recordButton");
-var stopButton = document.getElementById("stopButton");
+// var stopButton = document.getElementById("stopButton");
 
 //add events to those 2 buttons
-recordButton.addEventListener("click", startRecording);
+ var flag = true
+recordButton.addEventListener("click", (e) => {
+	if(flag == true){
+		startRecording()
+		recordButton.innerHTML = "Recording"
+		flag = false
+
+	}
+	else {
+		stopRecording()
+			recordButton.innerHTML = "Record"
+		flag = true
+	}
+});
 stopButton.addEventListener("click", stopRecording);
 
 function startRecording() {
@@ -105,8 +118,8 @@ function startRecording() {
     	Disable the record button until we get a success or fail from getUserMedia() 
 	*/
 
-	recordButton.disabled = true;
-	stopButton.disabled = false;
+	// recordButton.disabled = true;
+	// stopButton.disabled = false;
     navigator.mediaDevices.getUserMedia(constraints).then(function(stream) {
 		console.log("getUserMedia() success, stream created, initializing Recorder.js ...");
 
@@ -140,7 +153,7 @@ function startRecording() {
 	}).catch(function(err) {
 	  	//enable the record button if getUserMedia() fails
     	recordButton.disabled = false;
-    	stopButton.disabled = true;
+    	// stopButton.disabled = true;
     	
 	});
 }
@@ -149,7 +162,7 @@ function stopRecording() {
 	console.log("stopButton clicked");
 
 	//disable the stop button, enable the record too allow for new recordings
-	stopButton.disabled = true;
+	// stopButton.disabled = true;
 	recordButton.disabled = false;
 	
 
@@ -191,5 +204,5 @@ async function createDownloadLink(blob)
         data: formData
     }) */
 
-    
+    window.location.reload();
 }

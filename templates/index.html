@@ -13,14 +13,40 @@
    
 
     <body>
-
-        <div class="container">
+        <div class="grid-container">
+            <div class="grid-item">
+                <div class="container">
+         
+                    <h1>VOICE RECORDING APP</h1>
+                    <span>Recorder</span>
+                    <audio id="recorder" ></audio>
+                    <div>
+                        <button id="recordButton">Record</button>
+                        <button id ="stopButton">Stop Recording</button>
+                    </div>
+              
+                    
+                    <h1> {{ voice_prediction }}</h1>
+                    <h1> {{ speech_prediction }}</h1>
+                   
+                </div>
+            </div>
+            <div class="nested-grid-container">
+            <div class="grid-item">2</div>
+            <div class="grid-item">3</div>
+            <div class="grid-item">4</div>
+            <div class="grid-item">5</div>
+          
+            </div>
+        </div>
+        <!-- <div class="container">
+         
             <h1>VOICE RECORDING APP</h1>
             <span>Recorder</span>
             <audio id="recorder" ></audio>
             <div>
                 <button id="recordButton">Record</button>
-{#                <button id ="stopButton">Stop Recording</button>#}
+                <button id ="stopButton">Stop Recording</button>#}
             </div>
       
             
@@ -32,7 +58,7 @@
         <div >
             <img src="{{ url_for('static',filename='spectro.png') }}" width="500" height="400" />
         </div>
-        {% endif %}
+        {% endif %} -->
         <script type="text/javascript" src="{{ url_for('static',filename='/main.js') }}" ></script>
         <script type="text/javascript" src="{{ url_for('static',filename='/recorder.js') }}" ></script>
         

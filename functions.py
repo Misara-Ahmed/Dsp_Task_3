@@ -56,7 +56,7 @@ def apply_model(features_list):
     # voice_model = pickle.load(open('./Person_model.sav', 'rb'))
     # speech_model=pickle.load(open('./Word_model.sav', 'rb'))
     # x_pre = np.array(features_list)
-    audio, sr = lr.load(features_list,mono=True,duration=30)
+    audio, sr = lr.load(features_list, sr=48000, mono=False,duration=30)
     vector = extract_features(audio,sr)
     gmm_files = [i + '.joblib' for i in ['Misara', 'Ahmed', 'Youssef','Hanya']]
     models = [joblib.load(fname) for fname in gmm_files]

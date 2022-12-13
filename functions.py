@@ -37,7 +37,7 @@ def calculate_delta(array):
     return deltas
 
 def extract_features(audio, rate):
-    mfcc_feature = mfcc.mfcc(audio, rate, 0.025, 0.01, 20, nfft=2205, appendEnergy=True)
+    mfcc_feature = mfcc.mfcc(audio, rate, 0.025, 0.01, 20, nfft=1024, appendEnergy=True)
     mfcc_feature = preprocessing.scale(mfcc_feature)
     #     print(mfcc_feature)
     delta = calculate_delta(mfcc_feature)
@@ -56,7 +56,7 @@ def apply_model(features_list):
     # voice_model = pickle.load(open('./Person_model.sav', 'rb'))
     # speech_model=pickle.load(open('./Word_model.sav', 'rb'))
     # x_pre = np.array(features_list)
-    audio, sr = lr.load(features_list,mono=True,duration=30)
+    audio, sr = lr.load(features_list,mono=True,duration=30,sr=None)
     vector = extract_features(audio,sr)
     gmm_files = [i + '.joblib' for i in ['Misara', 'Ahmed', 'Youssef','Hanya']]
     models = [joblib.load(fname) for fname in gmm_files]

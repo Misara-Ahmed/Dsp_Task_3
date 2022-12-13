@@ -47,7 +47,7 @@ def index():
             #     data = fio.getvalue()
             # data = data.decode('float64')
             # print(data.dtype)
-            soundfile.write(f'my-rec.wav', data, samplerate)
+            soundfile.write('my-rec.wav', data, samplerate)
             with open("my-rec.wav", 'rb') as fp:
                 audio = fp.read()
 

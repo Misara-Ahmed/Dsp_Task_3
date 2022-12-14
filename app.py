@@ -13,12 +13,18 @@ app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 def index():
     if(request.method=='GET'):
         # features_list=audio_features.feature_extraction_array('./my-rec.wav')
-        prediction=fn.apply_model(r'./my-rec.wav')
-        img,fig = fn.plot_melspectrogram('./my-rec.wav')
-        fig.colorbar(img,format="%+2.f")
-        spectro = plt.savefig('./static/spectro.png')
+        try:
+            prediction=fn.apply_model(r'./my-rec.wav')
+            img,fig = fn.plot_melspectrogram('./my-rec.wav')
+            fig.colorbar(img,format="%+2.f")
+            spectro = plt.savefig('./static/spectro.png')
+            result_1 = fn.Names_return(prediction)
+        except:
+            pass
+            result_1=["please record", "a longer file"]
+        
         spectro = True
-        result_1 = fn.Names_return(prediction)
+        
     else:
         if 'data' in request.files:
             url = "http://127.0.0.1:5000/"

@@ -46,7 +46,7 @@ button{
     max-width: 300px;
     padding: 10px 20px;
     border: 2px solid indigo;
-    font-size: 20px;
+    font-size: 32px;
     color: indigo;
     background-color: transparent;
 }
@@ -97,6 +97,17 @@ audio{
     background-color: rgba(255, 255, 255, 0.8);
     border: 1px solid rgba(0, 0, 0, 0.8);
     padding: 20px;
-    font-size: 30px;
+    font-size: 19px;
     text-align: center;
-  } 
+  }
+  .prediction{
+      background-color: rgba(255, 255, 255, 0.8);
+      /*border: 1px solid rgba(0, 0, 0, 0.8);*/
+      padding: 20px;
+      font-size: 50px;
+      text-align: center;
+      font-weight: bold;
+  }
+  /*@media all  {*/
+
+  /*}*/

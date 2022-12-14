@@ -54,9 +54,11 @@ def index():
             # data = data.decode('float64')
             # print(data.dtype)
             soundfile.write('my-rec.wav', data, samplerate)
+            # fn.iter += 1
+            #print(fn.iter)
             with open("my-rec.wav", 'rb') as fp:
                 audio = fp.read()
-            # result = request.post(url, data=audio)
+            result = request.post(url, data=audio)
             # features_list=result.text
             result_1=[]
             # voice_prediction=""

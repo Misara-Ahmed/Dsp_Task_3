@@ -10,7 +10,7 @@ import joblib
 from sklearn import preprocessing
 from librosa import power_to_db , util
 import scipy
-iter = 0
+iter = 2
 
 
 def calculate_delta(array):

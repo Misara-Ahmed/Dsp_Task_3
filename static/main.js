@@ -92,7 +92,7 @@ var recordButton = document.getElementById("recordButton");
 recordButton.addEventListener("click", (e) => {
 	if(flag == true){
 		startRecording()
-		recordButton.innerHTML = "Recording"
+		recordButton.innerHTML = "Recording..."
 		flag = false
 
 	}
@@ -102,7 +102,7 @@ recordButton.addEventListener("click", (e) => {
 		flag = true
 	}
 });
-stopButton.addEventListener("click", stopRecording);
+// stopButton.addEventListener("click", stopRecording);
 
 function startRecording() {
 	console.log("recordButton clicked");

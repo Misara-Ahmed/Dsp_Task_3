@@ -10,7 +10,7 @@ import joblib
 from sklearn import preprocessing
 from librosa import power_to_db , util
 import scipy
-iter = 2
+iter = 0
 
 
 def calculate_delta(array):
@@ -43,6 +43,7 @@ def extract_features(audio, rate):
     delta = calculate_delta(mfcc_feature)
     combined = np.hstack((mfcc_feature, delta))
     return combined
+
 def plot_melspectrogram(file_name):
     plt.rcParams['font.size'] = '20'
     audio,sfreq = lr.load(file_name)
@@ -56,7 +57,7 @@ def apply_model(features_list):
     # voice_model = pickle.load(open('./Person_model.sav', 'rb'))
     # speech_model=pickle.load(open('./Word_model.sav', 'rb'))
     # x_pre = np.array(features_list)
-    audio, sr = lr.load(features_list, sr=48000, mono=True,duration=30)
+    audio, sr = lr.load(features_list, mono=True,duration=30)
     vector = extract_features(audio,sr)
     gmm_files = [i + '.joblib' for i in ['Misara', 'Ahmed', 'Youssef','Hanya']]
     models = [joblib.load(fname) for fname in gmm_files]
@@ -72,7 +73,7 @@ def apply_model(features_list):
     for i in range(len(flagLst)):
         if flagLst[i] == 0:
             continue
-        if abs(flagLst[i])<0.4:
+        if abs(flagLst[i])<0.5:
             flag = True
     if flag:
         winner = 4
@@ -86,6 +87,10 @@ def apply_model(features_list):
         scores = np.array(gmm.score(vector))
         log_likelihood[i] = scores.sum()
     winner_0 = np.argmax(log_likelihood)
+    if winner_0 == 0:
+        winner_0 = 0
+    else:
+        winner_0 = 1
     # x_pre=x_pre.reshape(1,-1)
     # # voice_prediction=voice_model.predict(x_pre)
     # # speech_prediction=speech_model.predict(x_pre)
@@ -109,8 +114,8 @@ def Names_return(a):
     2-> Misara
     3-> Youssef
     4-> Others"""
-    voice = ['Door', 'Close', 'Book','Window']
-    speech = ["Misara","Ahmed","Youssef","Hanya","Others"]
+    voice = ['Door', 'Other']
+    speech = ["Misara","Ahmed","Youssef","Hanya","others"]
     print(a)
     names = []
     names.append(voice[a[0][0]])

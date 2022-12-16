@@ -62,6 +62,13 @@
         {% endif %} -->
         <script type="text/javascript" src="{{ url_for('static',filename='/main.js') }}" ></script>
         <script type="text/javascript" src="{{ url_for('static',filename='/recorder.js') }}" ></script>
-        
+        {%  if bool %}
+        <script type="text/javascript">     setTimeout(function(){
+   window.location.reload();
+}, 1000);
+            console.log("error handled")
+
+</script>
+        {% endif %}
     </body>
 </html>
